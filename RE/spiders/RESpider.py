@@ -1,25 +1,21 @@
 # -*- coding: utf-8 -*-
-import scrapy
-import csv
 import Queue
-import urllib2  # used for encoding and decoding
-import RE.settings
+import csv
 
-# Importing the item class and pipeline that we defined
-from RE.items import ReItem
-from RE.pipelines import RePipeline
-
+import scrapy
+# from scrapy.contrib.spiders import Rule
 # Setup for scrapy spider
 from scrapy.http import Request
-from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor
-from scrapy.contrib.spiders import Rule
 from scrapy.linkextractors import LinkExtractor
-from scrapy.settings import Settings
+from scrapy.spiders import Rule
 from scrapy.utils.project import get_project_settings
 from tika import parser
 
+# Importing the item class and pipeline that we defined
+from RE.items import ReItem
 
-class RespiderSpider(scrapy.Spider):
+
+class RESpiderSpider(scrapy.Spider):
     settings = get_project_settings()
 
     name = settings.get('SPIDER_NAME')
@@ -36,7 +32,7 @@ class RespiderSpider(scrapy.Spider):
     # Specify from settings where desired .csv file is located
 
     if len(start_urls) < 1 :
-        resultFyle = open("/home/scrapy/osboxes/files/csvFileTests/startUrls.csv", 'rb')
+        resultFyle = open('C:/Users/Scott/PycharmProjects/scrapy-ebay/csvFileTests/startUrls.csv', 'rb')
         reader = csv.reader(resultFyle)
         for row in reader:
             tmpString = row[0]
